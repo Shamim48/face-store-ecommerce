@@ -9,22 +9,6 @@ class ProductRepo {
   ProductRepo({required this.dioClient});
 
   // Products from api
-/*
-  Future<List<ProductModel>> fetchProducts() async {
-    try {
-      Response response = await Dio().get(AppConstants.BASE_URL+AppConstants.PRODUCTLIST);
-      var responseJson = json.decode(response.data) as Map;
-      List<ProductModel> products = [];
-      for (var item in responseJson) {
-        products.add(item);
-      }
-      return products;
-    } catch (error) {
-      print(error);
-      throw error;
-    }
-  }
-*/
 
 
   Future<List<ProductModel>> getProducts() async {

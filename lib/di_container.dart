@@ -2,13 +2,14 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:fakestore/data/datasource/remote/dio/dio_client.dart';
 import 'package:fakestore/data/repository/cart_repo.dart';
+import 'package:fakestore/data/repository/product_details_repo.dart';
 import 'package:fakestore/data/repository/product_repo.dart';
 import 'package:fakestore/data/repository/splash_repo.dart';
 import 'package:fakestore/helper/network_info.dart';
+import 'package:fakestore/provider/cart_provider.dart';
+import 'package:fakestore/provider/product_details_provider.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'data/datasource/remote/dio/logging_interceptor.dart';
 import 'provider/product_provider.dart';
 import 'provider/splash_provider.dart';
@@ -25,8 +26,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductRepo(dioClient: sl()));
   sl.registerLazySingleton(() => CartRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ProductDetailsRepo(dioClient: sl()));
+
   // Provider
   sl.registerFactory(() => ProductProvider(productRepo: sl()));
+  sl.registerFactory(() => SplashProvider(splashRepo: sl()));
+  sl.registerFactory(() => CartProvider(cartRepo: sl()));
+  sl.registerFactory(() => ProductDetailsProvider(productDetailsRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

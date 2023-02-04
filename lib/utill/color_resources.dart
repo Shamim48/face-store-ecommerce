@@ -97,7 +97,7 @@ class ColorResources {
   static const Color LIGHT_SKY_BLUE = Color(0xff8DBFF6);
   static const Color HARLEQUIN = Color(0xff3FCC01);
   static const Color CERISE = Color(0xffE2206B);
-  static const Color GREY = Color(0xffF1F1F1);
+  static const Color GREY = Color(0xff9E9E9E);
   static const Color RED = Color(0xFFD32F2F);
   static const Color YELLOW = Color(0xFFFFAA47);
   static const Color HINT_TEXT_COLOR = Color(0xff9E9E9E);
