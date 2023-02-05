@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:fakestore/provider/product_provider.dart';
 import 'package:fakestore/provider/splash_provider.dart';
+import 'package:fakestore/screen/home/home_screen.dart';
 import 'package:fakestore/screen/product/product_screen.dart';
 import 'package:fakestore/screen/splash/widget/splash_painter.dart';
 import 'package:fakestore/utill/color_resources.dart';
@@ -23,10 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     bool _firstTime = true;
-    _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!_firstTime) {
-        bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
-        isNotConnected ? SizedBox() : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    _onConnectivityChanged = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (!_firstTime) {
+        bool isNotConnected = result != ConnectivityResult.wifi &&
+            result != ConnectivityResult.mobile;
+        isNotConnected
+            ? SizedBox()
+            : ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: isNotConnected ? Colors.red : Colors.green,
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
@@ -35,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
             textAlign: TextAlign.center,
           ),
         ));
-        if(!isNotConnected) {
+        if (!isNotConnected) {
           _route();
         }
       }
@@ -56,7 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Provider.of<SplashProvider>(context, listen: false).initSharedPrefData();
     Provider.of<ProductProvider>(context, listen: false).getProductList();
     Timer(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ProductScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => HomePage()));
     });
   }
 
@@ -65,7 +72,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       key: _globalKey,
       body: Stack(
-        clipBehavior: Clip.none, children: [
+        clipBehavior: Clip.none,
+        children: [
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -78,7 +86,13 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(Images.mlogo, height: 250.0, fit: BoxFit.scaleDown, width: 250.0, color: Theme.of(context).cardColor,),
+                Image.asset(
+                  Images.mlogo,
+                  height: 250.0,
+                  fit: BoxFit.scaleDown,
+                  width: 250.0,
+                  color: Theme.of(context).cardColor,
+                ),
               ],
             ),
           ),
@@ -86,5 +100,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
 }

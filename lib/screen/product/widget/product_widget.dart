@@ -1,8 +1,12 @@
+import 'package:fakestore/data/model/response/cart_model.dart';
 import 'package:fakestore/data/model/response/product_model.dart';
+import 'package:fakestore/provider/cart_provider.dart';
 import 'package:fakestore/screen/product/product_details_screen.dart';
+import 'package:fakestore/utill/color_resources.dart';
 import 'package:fakestore/utill/custom_themes.dart';
 import 'package:fakestore/utill/images.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductWidget extends StatelessWidget {
   final ProductModel productModel;
@@ -26,7 +30,7 @@ class ProductWidget extends StatelessWidget {
         margin: EdgeInsets.all(10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: index%2==0 ? Colors.blue.shade50 : Colors.deepOrange.shade50,
+            color: index%2==0 ? ColorResources.CART1_BG : ColorResources.CART2_BG,
             borderRadius: BorderRadius.all(Radius.circular(30))
         ),
         child: Column(
@@ -37,14 +41,14 @@ class ProductWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width/1,
-                    height: MediaQuery.of(context).size.width/1,
+                    width: MediaQuery.of(context).size.width/2,
+                    height: MediaQuery.of(context).size.width/2,
                     alignment: Alignment.center,
-                    margin: index%2==0 ? EdgeInsets.only(left: 50, right: 50, top: 40, bottom: 10 ) : const EdgeInsets.only(left: 60, right: 60, top: 0, bottom: 40 ),
+                    margin: index%2==0 ? EdgeInsets.only(left: 60, right: 60, top: 60, bottom: 20 ) : const EdgeInsets.only(left: 60, right: 60, top: 10, bottom: 60 ),
                     transform:  Matrix4.translationValues( 0.33, 0.33, 0.33)
                       ..rotateZ((index%2==0 ? -28 : 28) / 180),
                     decoration: BoxDecoration(
-                        color: index%2==0 ? Colors.blue.shade100.withOpacity(0.6) : Colors.deepOrange.shade100.withOpacity(0.6),
+                        color: index%2==0 ? ColorResources.CART1_SHAPE : ColorResources.CART2_SHAPE,
                         borderRadius: BorderRadius.all(Radius.circular(20))
                     ),
                   ),
@@ -80,16 +84,22 @@ class ProductWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                  ),
-                  child: Icon(
-                    Icons.shopping_cart,
-                    size: 30,
+                InkWell(
+                  onTap: (){
+                    CartModel cart= CartModel(productModel, 1);
+                    Provider.of<CartProvider>(context, listen: false).addToCart(cart);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 30,
+                    ),
                   ),
                 ),
               ],

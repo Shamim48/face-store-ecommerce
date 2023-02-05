@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'di_container.dart' as di;
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(MultiProvider(
@@ -15,7 +15,8 @@ Future<void> main() async{
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProductProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<CartProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<ProductDetailsProvider>()),
+      ChangeNotifierProvider(
+          create: (context) => di.sl<ProductDetailsProvider>()),
     ],
     child: MyApp(),
   ));
@@ -29,7 +30,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -48,4 +48,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

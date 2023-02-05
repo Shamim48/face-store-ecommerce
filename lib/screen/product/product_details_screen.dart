@@ -1,4 +1,6 @@
+import 'package:fakestore/data/model/response/cart_model.dart';
 import 'package:fakestore/data/model/response/product_model.dart';
+import 'package:fakestore/provider/cart_provider.dart';
 import 'package:fakestore/provider/product_details_provider.dart';
 import 'package:fakestore/screen/product/widget/product_image_view.dart';
 import 'package:fakestore/utill/color_resources.dart';
@@ -28,21 +30,18 @@ class _ProductDetailsState extends State<ProductDetails> {
     ScrollController _scrollController = ScrollController();
 
       return widget.product!=null ? Scaffold(
-          //backgroundColor: ColorResources.GREY,
-          /*appBar: AppBar(
-            title: Row(children: [
-              InkWell(
-                child: Icon(Icons.arrow_back_ios, color: Theme.of(context).cardColor, size: 20),
-                onTap: () => Navigator.pop(context),
-              ),
-              SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-              Text("Product Details",
-                  style: ubuntuRegular.copyWith(fontSize: 20, color: Theme.of(context).cardColor)),
-            ]),
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor:  Colors.black ,
-          ),*/
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            CartModel cart= CartModel(widget.product, 1);
+            Provider.of<CartProvider>(context, listen: false).addToCart(cart);
+          },
+          backgroundColor: ColorResources.BLACK,
+          child: Icon(
+            Icons.shopping_cart_outlined,
+            size: 30,
+            color: ColorResources.WHITE,
+          ),
+        ),
 
           body: SingleChildScrollView(
             padding: EdgeInsets.all(10),
@@ -65,7 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             SizedBox(height: 5,),
                             Text(widget.product.title, style: ubuntuSemiBold.copyWith(fontSize: 18, overflow: TextOverflow.ellipsis ), ),
                             SizedBox(height: 10,),
-                            Text("Select SIze", style: ubuntuRegular ),
+                            Text("Select Size", style: ubuntuRegular ),
                           ],
                         ),
                       ),
@@ -124,27 +123,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: MediaQuery.of(context).size.width-40,
                     height: 300,
                     child: Text(widget.product.description, style: ubuntuRegular.copyWith( fontSize: 14),))
-                /*Container(
-                  transform: Matrix4.translationValues(0.0, -25.0, 0.0),
-                  padding: EdgeInsets.only(top: Dimensions.FONT_SIZE_DEFAULT),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).canvasColor,
-                      borderRadius: BorderRadius.only(topLeft:Radius.circular(Dimensions.PADDING_SIZE_EXTRA_LARGE),
-                          topRight:Radius.circular(Dimensions.PADDING_SIZE_EXTRA_LARGE) ),
-                        ),
-                  child: Column(children: [
-
-                  Flexible(child: Text(widget.product.title, style: ubuntuSemiBold.copyWith(fontSize: 18, overflow: TextOverflow.ellipsis),)),
-
-                  // Specification
-                  (widget.product.description != null && widget.product.description.isNotEmpty) ? Container(
-                    height: 158,
-                    margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                    child: Text(widget.product.description ?? '', style: ubuntuRegular.copyWith(color: Colors.black),),
-                  ) : SizedBox(),
-
-                ],),),*/
               ],
             ),
           ),

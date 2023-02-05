@@ -105,6 +105,12 @@ class ColorResources {
   static const Color TEXT_BG = Color(0xffF3F9FF);
   static const Color GREEN = Color(0xff23CB60);
   static const Color FLOATING_BTN = Color(0xff7DB6F5);
+  static const Color REVIEW_RATING = Color(0xFF66717C);
+  static const Color CART_BG = Color(0xffEBF3F6);
+  static const Color CART1_BG = Color(0xffEBF3F6);
+  static const Color CART1_SHAPE = Color(0xffE0EBED);
+  static const Color CART2_BG = Color(0xffFFEDDF);
+  static const Color CART2_SHAPE = Color(0xffFFE5CE);
 
 
 

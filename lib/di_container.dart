@@ -20,12 +20,15 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
-  sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(),
+      loggingInterceptor: sl(), sharedPreferences: sl()));
 
   // Repository
   sl.registerLazySingleton(() => ProductRepo(dioClient: sl()));
-  sl.registerLazySingleton(() => CartRepo(dioClient: sl(), sharedPreferences: sl()));
-  sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => CartRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => ProductDetailsRepo(dioClient: sl()));
 
   // Provider
