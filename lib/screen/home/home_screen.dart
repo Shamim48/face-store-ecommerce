@@ -90,20 +90,19 @@ class _HomePageState extends State<HomePage> {
                       delegate: SliverDelegate(
                           child: InkWell(
                        // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
-                            child: Container(padding: EdgeInsets.symmetric(
+                            child: Container(padding:const EdgeInsets.symmetric(
                                 horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL),
                               color: ColorResources.WHITE,
                               alignment: Alignment.center,
-                              child: Container(padding: EdgeInsets.only(
+                              child: Container(padding:const EdgeInsets.only(
                                 left: Dimensions.HOME_PAGE_PADDING, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                                top: Dimensions.PADDING_SIZE_EXTRA_SMALL, bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                              ),
+                                top: Dimensions.PADDING_SIZE_EXTRA_SMALL,),
                                 height: 50, alignment: Alignment.centerLeft,
                                 decoration: BoxDecoration(color: ColorResources.TEXT_FIELD_BG,
                                   borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
                                 child: Row(mainAxisAlignment : MainAxisAlignment.spaceBetween, children: [
 
-                                  Icon(Icons.search, color: ColorResources.BLACK, size: Dimensions.ICON_SIZE_DEFAULT),
+                                  const Icon(Icons.search, color: ColorResources.BLACK, size: Dimensions.ICON_SIZE_DEFAULT),
                                   Expanded(
                                     child: Text("Search Product...",
                                         style: ubuntuRegular.copyWith(color: Theme.of(context).hintColor)),
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
 
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
+                      padding:const EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height-120,
@@ -132,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                                 itemBuilder: (context, index){
                                   return ProductWidget(productModel: productList[index], index: index,);
                                 })
-                                : Center(child: CircularProgressIndicator());
+                                :const Center(child: CircularProgressIndicator());
                           },
                         ),
                       )

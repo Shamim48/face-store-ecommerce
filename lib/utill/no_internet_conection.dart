@@ -23,16 +23,16 @@ class NoInternetOrDataScreen extends StatelessWidget {
               fontSize: 30,
               color: isNoInternet ? Theme.of(context).textTheme.bodyText1!.color : ColorResources.COLUMBIA_BLUE,
             )),
-            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+            const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
             Text(
               isNoInternet ? "No Internet Connection" : 'No data found',
               textAlign: TextAlign.center,
               style: ubuntuRegular,
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             isNoInternet ? Container(
               height: 45,
-              margin: EdgeInsets.symmetric(horizontal: 40),
+              margin:const EdgeInsets.symmetric(horizontal: 40),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: ColorResources.HINT_TEXT_COLOR),
               child: TextButton(
                 onPressed: () async {
@@ -46,7 +46,7 @@ class NoInternetOrDataScreen extends StatelessWidget {
                   child: Text("RETRY", style: ubuntuBold.copyWith(color: Theme.of(context).highlightColor, fontSize: Dimensions.FONT_SIZE_LARGE)),
                 ),
               ),
-            ) : SizedBox.shrink(),
+            ) :const SizedBox.shrink(),
 
           ],
         ),

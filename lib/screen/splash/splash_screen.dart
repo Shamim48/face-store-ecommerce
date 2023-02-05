@@ -3,7 +3,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:fakestore/provider/product_provider.dart';
 import 'package:fakestore/provider/splash_provider.dart';
 import 'package:fakestore/screen/home/home_screen.dart';
-import 'package:fakestore/screen/product/product_screen.dart';
 import 'package:fakestore/screen/splash/widget/splash_painter.dart';
 import 'package:fakestore/utill/color_resources.dart';
 import 'package:fakestore/utill/images.dart';

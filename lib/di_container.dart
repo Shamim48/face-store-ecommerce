@@ -25,10 +25,8 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton(() => ProductRepo(dioClient: sl()));
-  sl.registerLazySingleton(
-      () => CartRepo(dioClient: sl(), sharedPreferences: sl()));
-  sl.registerLazySingleton(
-      () => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => CartRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => ProductDetailsRepo(dioClient: sl()));
 
   // Provider

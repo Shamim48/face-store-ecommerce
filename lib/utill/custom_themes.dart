@@ -1,3 +1,4 @@
+import 'package:fakestore/utill/color_resources.dart';
 import 'package:fakestore/utill/dimensions.dart';
 import 'package:flutter/material.dart';
 
@@ -28,4 +29,11 @@ const ubuntuItalic = TextStyle(
   fontSize: Dimensions.FONT_SIZE_DEFAULT,
   fontStyle: FontStyle.italic,
 );
+
+snackBar (String msg){
+  return  SnackBar(
+    content:  Text(msg,style: ubuntuRegular.copyWith(color: ColorResources.WHITE),),
+    backgroundColor: ColorResources.COLOR_PRIMARY,
+  );
+}
 

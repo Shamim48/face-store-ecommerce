@@ -26,12 +26,12 @@ class ProductWidget extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width-40,
         height: MediaQuery.of(context).size.width-40,
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.all(10),
+        padding:const EdgeInsets.all(10),
+        margin:const EdgeInsets.all(10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: index%2==0 ? ColorResources.CART1_BG : ColorResources.CART2_BG,
-            borderRadius: BorderRadius.all(Radius.circular(30))
+            borderRadius:const BorderRadius.all(Radius.circular(30))
         ),
         child: Column(
           children: [
@@ -44,12 +44,12 @@ class ProductWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width/2,
                     height: MediaQuery.of(context).size.width/2,
                     alignment: Alignment.center,
-                    margin: index%2==0 ? EdgeInsets.only(left: 60, right: 60, top: 60, bottom: 20 ) : const EdgeInsets.only(left: 60, right: 60, top: 10, bottom: 60 ),
+                    margin: index%2==0 ? const EdgeInsets.only(left: 60, right: 60, top: 60, bottom: 20 ) : const EdgeInsets.only(left: 60, right: 60, top: 10, bottom: 60 ),
                     transform:  Matrix4.translationValues( 0.33, 0.33, 0.33)
                       ..rotateZ((index%2==0 ? -28 : 28) / 180),
                     decoration: BoxDecoration(
                         color: index%2==0 ? ColorResources.CART1_SHAPE : ColorResources.CART2_SHAPE,
-                        borderRadius: BorderRadius.all(Radius.circular(20))
+                        borderRadius:const BorderRadius.all(Radius.circular(20))
                     ),
                   ),
                   Positioned(
@@ -70,7 +70,7 @@ class ProductWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -88,15 +88,16 @@ class ProductWidget extends StatelessWidget {
                   onTap: (){
                     CartModel cart= CartModel(productModel, 1);
                     Provider.of<CartProvider>(context, listen: false).addToCart(cart);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar("Add to cart successful!"));
                   },
                   child: Container(
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
-                        borderRadius: BorderRadius.all(Radius.circular(10))
+                        borderRadius:const BorderRadius.all(Radius.circular(10))
                     ),
-                    child: Icon(
+                    child:const Icon(
                       Icons.shopping_cart_outlined,
                       size: 30,
                     ),
@@ -104,7 +105,7 @@ class ProductWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
           ],
         ),
       ),

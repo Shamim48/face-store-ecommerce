@@ -19,11 +19,11 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+      margin:const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+      padding:const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       decoration: BoxDecoration(
         color: ColorResources.WHITE,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius:const BorderRadius.all(Radius.circular(10)),
         boxShadow: [
           BoxShadow(
               color: ColorResources.BLACK.withOpacity(0.3),
@@ -37,7 +37,7 @@ class CartWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(3),
+              padding:const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: ColorResources.WHITE,
                   borderRadius: BorderRadius.circular(
@@ -68,8 +68,7 @@ class CartWidget extends StatelessWidget {
             ),
             Expanded(
                 child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+              padding:const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -85,9 +84,7 @@ class CartWidget extends StatelessWidget {
                               color: ColorResources.REVIEW_RATING,
                             )),
                       ),
-                      SizedBox(
-                        width: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                      ),
+                      const SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL,),
                       !fromCheckout
                           ? InkWell(
                               onTap: () {
@@ -106,12 +103,10 @@ class CartWidget extends StatelessWidget {
                           : SizedBox.shrink(),
                     ],
                   ),
-                  SizedBox(
-                    height: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                  ),
+                  const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL,),
                   Row(
                     children: [
-                      Text("\$${cartModel.productModel!.price-10}",
+                      Text("\$${cartModel.productModel!.price-5}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: ubuntuBold.copyWith(
@@ -119,9 +114,7 @@ class CartWidget extends StatelessWidget {
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-                      const SizedBox(
-                        width: Dimensions.FONT_SIZE_DEFAULT,
-                      ),
+                      const SizedBox(width: Dimensions.FONT_SIZE_DEFAULT,),
                       Text(
                         "\$${cartModel.productModel!.price}",
                         maxLines: 1,
@@ -132,13 +125,13 @@ class CartWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                  const SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                   Row(
                     children: [
                       Expanded(child: Text(cartModel.productModel!.category, style: ubuntuRegular.copyWith(
                         overflow: TextOverflow.ellipsis, ),)),
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding:const EdgeInsets.only(
                             right: Dimensions.PADDING_SIZE_SMALL),
                         child: QuantityButton(
                             isIncrement: false,
@@ -149,7 +142,7 @@ class CartWidget extends StatelessWidget {
                       ),
                       Text(cartModel.quantity.toString(), style: ubuntuBold),
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding:const EdgeInsets.only(
                             left: Dimensions.PADDING_SIZE_SMALL),
                         child: QuantityButton(
                             index: index,

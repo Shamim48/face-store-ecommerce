@@ -3,6 +3,7 @@ import 'package:fakestore/provider/cart_provider.dart';
 import 'package:fakestore/screen/basewidget/custom_app_bar.dart';
 import 'package:fakestore/screen/cart/widget/cart_widget.dart';
 import 'package:fakestore/utill/color_resources.dart';
+import 'package:fakestore/utill/custom_themes.dart';
 import 'package:fakestore/utill/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,30 +24,23 @@ class _CartScreenState extends State<CartScreen> {
     Provider.of<CartProvider>(context, listen: false).getCartData();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(builder: (context, cart, child) {
       double amount = 0.0;
       double shippingAmount = 0.0;
-      double discount = 0.0;
-      double tax = 0.0;
       List<CartModel> cartList = [];
       cartList.addAll(cart.cartList);
 
       for (int i = 0; i < cart.cartList.length; i++) {
-        amount +=
-            (cart.cartList[i].productModel!.price) * cart.cartList[i].quantity;
-        discount += 0 * cart.cartList[i].quantity;
-        tax += 15 * cart.cartList[i].quantity;
+        amount += (cart.cartList[i].productModel!.price) * cart.cartList[i].quantity;
       }
-
       return Scaffold(
-        /*bottomNavigationBar: (!widget.fromCheckout && !cart.isLoading)
-            ? Container(height: 80, padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE,
+        bottomNavigationBar:  Container(height: 80, padding:const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE,
             vertical: Dimensions.PADDING_SIZE_DEFAULT),
-
           decoration: BoxDecoration(color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+            borderRadius:const BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
           ),
           child: cartList.isNotEmpty ?
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,41 +49,20 @@ class _CartScreenState extends State<CartScreen> {
                     child: Center(
                         child: Row(
                           children: [
-                            Text('${getTranslated('total_price', context)}', style: titilliumSemiBold.copyWith(
-                                fontSize: Dimensions.FONT_SIZE_LARGE),
+                            Text('Total Price: ', style: ubuntuSemiBold.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_LARGE,),
                             ),
-                            Text(PriceConverter.convertPrice(context, amount+shippingAmount), style: titilliumSemiBold.copyWith(
-                                color: Theme.of(context).primaryColor,fontSize: Dimensions.FONT_SIZE_LARGE),
+                            Text('\$${(amount+shippingAmount).toStringAsFixed(2)}', style: ubuntuSemiBold.copyWith(
+                                color: Theme.of(context).primaryColor,fontSize: Dimensions.FONT_SIZE_LARGE, overflow: TextOverflow.ellipsis),
                             ),
                           ],
                         ))),
                 Builder(
                   builder: (context) => InkWell(
                     onTap: () {
-                      print('===asd=>${orderTypeShipping.length}');
-                      if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-                        if (cart.cartList.length == 0) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(getTranslated('select_at_least_one_product', context)), backgroundColor: Colors.red,));
-                        } else if(cart.chosenShippingList.length < orderTypeShipping.length &&
-                            Provider.of<SplashProvider>(context,listen: false).configModel.shippingMethod =='sellerwise_shipping'){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(getTranslated('select_all_shipping_method', context)), backgroundColor: Colors.red));
-                        }else if(cart.chosenShippingList.length < 1 &&
-                            Provider.of<SplashProvider>(context,listen: false).configModel.shippingMethod !='sellerwise_shipping' && Provider.of<SplashProvider>(context,listen: false).configModel.inHouseSelectedShippingType =='order_wise'){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(getTranslated('select_all_shipping_method', context)), backgroundColor: Colors.red));
-                        }
-
-
-                        else {
-
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen(
-                            cartList: cartList,totalOrderAmount: amount,shippingFee: shippingAmount, discount: discount,
-                            tax: tax,
-                          )));
-
-                        }
-                      } else {showAnimatedDialog(context, GuestDialog(), isFlip: true);}
+                      orderCompleteDialog(context);
+                      Provider.of<CartProvider>(context, listen: false).removeCheckoutProduct(cartList);
                     },
-
                     child: Container(width: MediaQuery.of(context).size.width/2.5,
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
@@ -99,8 +72,8 @@ class _CartScreenState extends State<CartScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_LARGE,
                               vertical: Dimensions.FONT_SIZE_SMALL),
-                          child: Text(getTranslated('checkout', context),
-                              style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                          child: Text('Checkout',
+                              style: ubuntuSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT,
                                 color: Theme.of(context).cardColor,
                               )),
                         ),
@@ -109,15 +82,14 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ]):SizedBox(),
-        )
-            : null,*/
-        body: Column(
+        ) ,
+        body: ListView(
           children: [
             CustomAppBar(title: "Cart"),
             Card(
               child: Container(
-                padding: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_LARGE),
-                decoration: BoxDecoration(
+                padding:const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                decoration:const BoxDecoration(
                   color: ColorResources.WHITE,
                 ),
                 child: ListView.builder(
@@ -140,4 +112,24 @@ class _CartScreenState extends State<CartScreen> {
       );
     });
   }
+}
+
+orderCompleteDialog(BuildContext context){
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:const Text("Order Complete"),
+        content:const Text("Congratulations! Your order has been successfully placed."),
+        actions: <Widget>[
+          TextButton(
+            child:const Text("OK"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
